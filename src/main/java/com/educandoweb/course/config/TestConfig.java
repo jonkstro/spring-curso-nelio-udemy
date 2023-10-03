@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.educandoweb.course.entities.Order;
 import com.educandoweb.course.entities.User;
+import com.educandoweb.course.entities.enums.OrderStatus;
 import com.educandoweb.course.repositories.OrderRepository;
 import com.educandoweb.course.repositories.UserRepository;
 
@@ -36,9 +37,9 @@ public class TestConfig implements CommandLineRunner {
         User u1 = new User(null, "Maria Brow", "maria@gmail.com", "98888888888", "123456");
         User u2 = new User(null, "Jon Snow", "jon@gmail.com", "989999999999", "123456");
 
-        Order o1 = new Order(null, Instant.parse("2023-10-02T21:14:10Z"), u1);
-        Order o2 = new Order(null, Instant.parse("2023-11-06T22:14:10Z"), u2);
-        Order o3 = new Order(null, Instant.parse("2023-12-22T23:14:10Z"), u1);
+        Order o1 = new Order(null, Instant.parse("2023-10-02T21:14:10Z"), u1, OrderStatus.WAITING_PAYMENT);
+        Order o2 = new Order(null, Instant.parse("2023-11-06T22:14:10Z"), u2, OrderStatus.WAITING_PAYMENT);
+        Order o3 = new Order(null, Instant.parse("2023-12-22T23:14:10Z"), u1, OrderStatus.WAITING_PAYMENT);
 
         // Instanciar os objetos by default
         userRepository.saveAll(Arrays.asList(u1, u2));
