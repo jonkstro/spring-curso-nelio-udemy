@@ -15,10 +15,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.educandoweb.course.entities.Category;
 import com.educandoweb.course.entities.Order;
+import com.educandoweb.course.entities.Product;
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.entities.enums.OrderStatus;
 import com.educandoweb.course.repositories.CategoryRepository;
 import com.educandoweb.course.repositories.OrderRepository;
+import com.educandoweb.course.repositories.ProductRepository;
 import com.educandoweb.course.repositories.UserRepository;
 
 @Configuration
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -50,10 +55,17 @@ public class TestConfig implements CommandLineRunner {
         Category cat2 = new Category(null, "Books");
         Category cat3 = new Category(null, "Computers");
 
+        Product p1 = new Product(null, "Lord of the Rings", "Lorem ipsum dolor", 120.00, "");
+        Product p2 = new Product(null, "Smart tv", "Lorem ipsum dolor", 220.00, "");
+        Product p3 = new Product(null, "Acer nitro", "Lorem ipsum dolor", 180.00, "");
+        Product p4 = new Product(null, "PC Gamer", "Lorem ipsum dolor", 150.00, "");
+        Product p5 = new Product(null, "Xiaomi", "Lorem ipsum dolor", 125.00, "");
+
         // Instanciar os objetos by default
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
         categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+        productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
     }
 
 }
