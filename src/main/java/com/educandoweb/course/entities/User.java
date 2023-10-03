@@ -30,7 +30,7 @@ public class User implements Serializable {
     // O JsonIgnore irá serializar os objetos do outro lado, por exemplo, se 
     // adicionar o JsonIgnore em Orders, ele irá listar as ordens no endpoint /users
     // Como foi adicionado no users, ele vai serializar o user no endpoint /orders
-    @JsonIgnore
+    @JsonIgnore // Evitar o loop infinito
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 

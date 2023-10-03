@@ -8,6 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,6 +26,13 @@ public class Product implements Serializable {
     private String imgUrl;
 
     // Será usado o SET para que não tenha 2 categorias repetidas
+    // A associação de produtos e categorias são N:M -> vai precisar outra tabela
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+            // Chave estrangeira desse objeto que tá mapeando, se tivesse mapeando em category aqui ia ficar category
+            joinColumns = @JoinColumn(name = "product_id"),
+            // Chave estrangeira do outro objeto da relação, se tivesse mapeando em category aqui ia ficar o product
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
     public Product() {
