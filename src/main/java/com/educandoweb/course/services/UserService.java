@@ -25,4 +25,21 @@ public class UserService {
     public User createUser(User entity) {
         return repository.save(entity);
     }
+
+    public void deleteUser(Long id) {
+        repository.deleteById(id);
+    }
+
+    public User updateUser(Long id, User obj) {
+        User entity = repository.getReferenceById(id);
+        updateData(entity, obj);
+        return repository.save(entity);
+    }
+
+    private void updateData(User entity, User obj) {
+        // NÃO VAI SER ATUALIZADO O ID NEM SENHA
+        entity.setName(obj.getName());
+        entity.setEmail(obj.getEmail());
+        entity.setPhone(obj.getPhone());
+    }
 }
