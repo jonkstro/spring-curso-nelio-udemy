@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Profile;
 import com.educandoweb.course.entities.Category;
 import com.educandoweb.course.entities.Order;
 import com.educandoweb.course.entities.OrderItem;
+import com.educandoweb.course.entities.Payment;
 import com.educandoweb.course.entities.Product;
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.entities.enums.OrderStatus;
@@ -52,7 +53,7 @@ public class TestConfig implements CommandLineRunner {
         User u1 = new User(null, "Maria Brow", "maria@gmail.com", "98888888888", "123456");
         User u2 = new User(null, "Jon Snow", "jon@gmail.com", "989999999999", "123456");
 
-        Order o1 = new Order(null, Instant.parse("2023-10-02T21:14:10Z"), u1, OrderStatus.WAITING_PAYMENT);
+        Order o1 = new Order(null, Instant.parse("2023-10-02T21:14:10Z"), u1, OrderStatus.PAID);
         Order o2 = new Order(null, Instant.parse("2023-11-06T22:14:10Z"), u2, OrderStatus.WAITING_PAYMENT);
         Order o3 = new Order(null, Instant.parse("2023-12-22T23:14:10Z"), u1, OrderStatus.WAITING_PAYMENT);
 
@@ -86,6 +87,14 @@ public class TestConfig implements CommandLineRunner {
         OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
         OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
         orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
+        Payment pay1 = new Payment(null, Instant.parse("2023-10-02T22:14:10Z"), o1);
+        o1.setPayment(pay1);
+        orderRepository.save(o1);
+
+
+
+
     }
 
 }
