@@ -26,7 +26,7 @@ public class User implements Serializable {
     private String password;
 
     // Mapeamento JPA -> Definir o 1 pra Muitos, adicionando o atributo da
-    // outra classe entre os parenteses.
+    // outra classe entre os parenteses no mappedby.
     // O JsonIgnore irá serializar os objetos do outro lado, por exemplo, se 
     // adicionar o JsonIgnore em Orders, ele irá listar as ordens no endpoint /users
     // Como foi adicionado no users, ele vai serializar o user no endpoint /orders
