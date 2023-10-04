@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -12,6 +14,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "tb_user")
@@ -21,8 +27,15 @@ public class User implements Serializable {
     // ID autoincrementável
     private Long id;
     private String name;
+    @Email(message = "Campo de email inválido")
     private String email;
     private String phone;
+
+    @NotNull(message = "Campo não pode ser vazio")
+    @NotEmpty(message = "Campo é obrigatório")
+    @Length(min = 6, max = 30, message = "O campo de senha deve ter ao menos 6 caracteres e no máximo 30")
+    // OBS.: @Pattern abaixo tá bugado, deve tar dando algum erro no incript do password
+    // @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,128}$", message="PW_MIN_6_MAX_128_1_UPPER_1_LOWER_1_NUMERIC")
     private String password;
 
     // Mapeamento JPA -> Definir o 1 pra Muitos, adicionando o atributo da

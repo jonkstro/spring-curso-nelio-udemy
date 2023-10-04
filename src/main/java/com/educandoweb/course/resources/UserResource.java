@@ -38,9 +38,11 @@ public class UserResource {
 
     @PostMapping
     public ResponseEntity<User> create(@RequestBody User entity) {
+        service.createUser(entity);
         // Precisa isso tudo pra poder vir o código 201 CREATED com a URI do objeto e o ID
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(entity.getId()).toUri();
         return ResponseEntity.created(uri).body(entity);
+        
     }
 
     @DeleteMapping(value = "/{id}")
